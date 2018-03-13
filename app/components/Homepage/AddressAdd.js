@@ -5,19 +5,54 @@ import googleMapIcon from '../../vendor/images/google-map.png'
 require('./AddressAdd.scss')
 
 export default class AddressAdd extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      newAddress: {
+        streetname: '',
+        ward: '',
+        district: '',
+        country: '',
+        city: ''
+      }
+    }
+  }
+
+  handleChangeFor = (propertyName) => (event) => {
+        const { newAddress } = this.state;
+        const newAddressAdding = {
+            ...newAddress,
+            [propertyName]: event.target.value
+        };
+        this.setState({ newAddress: newAddressAdding });
+  }
+  updateAddress = (e) => {
+    e.preventDefault()
+    this.props.addNewAddress(this.state.newAddress)
+    //    Reset state
+    this.setState({
+      newAddress: {
+        streetname: '',
+        ward: '',
+        district: '',
+        country: '',
+        city: ''
+      }
+    })
+  }
   render () {
     return (
       <div>
         <h2>Form</h2>
         <form ref="addressForm" onSubmit={this.createFruit}>
           <div className="form-group">
-            <input type="text" placeholder="Street name" ref="fruitName"/>
-            <input type="text" placeholder="Ward" ref="fruitName" />
-            <input type="text" placeholder="District" ref="fruitName" />
-            <input type="text" placeholder="City" ref="fruitName" />
-            <input type="text" placeholder="Country" ref="fruitName" />
+            <input onChange={this.handleChangeFor('streetname')} type="text" placeholder="Street name" value={this.state.newAddress.streetname}/>
+            <input onChange={this.handleChangeFor('ward')} type="text" placeholder="Ward"value={this.state.newAddress.ward}/>
+            <input onChange={this.handleChangeFor('district')} type="text" placeholder="District"value={this.state.newAddress.district}/>
+            <input onChange={this.handleChangeFor('city')} type="text" placeholder="City"value={this.state.newAddress.city}/>
+            <input onChange={this.handleChangeFor('country')} type="text" placeholder="Country"value={this.state.newAddress.country}/>
           </div>
-          <button type="submit" className="submit-btn">Add</button>
+          <button onClick={this.updateAddress} type="submit" className="submit-btn">Add</button>
           <div className="chooseFromMap">
           </div>
         </form>
@@ -29,5 +64,5 @@ export default class AddressAdd extends React.Component {
 
 AddressAdd.propTypes = {
   route: PropTypes.object,
-  params: PropTypes.object
+  params: PropTypes.object,
 }

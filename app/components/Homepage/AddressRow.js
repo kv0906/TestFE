@@ -4,20 +4,25 @@ require('./HomePage.scss')
 require('./AddressRow.scss')
 
 export default class AddressRow extends React.Component {
+  constructor (props) {
+    super(props)
+    this.data = props.data
+    this.id = props.id
+    this.key = props.key
+  }
   render () {
     return (
       <tr>
-        <td>Berglunds snabbköp</td>
-        <td>Christina Berglund</td>
-        <td>Sweden</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
+        <td>{this.data.streetname}</td>
+        <td>{this.data.ward}</td>
+        <td>{this.data.district}</td>
+        <td>{this.data.city}</td>
+        <td>{this.data.country}</td>
       </tr>
     )
   }
 }
 
 AddressRow.propTypes = {
-  route: PropTypes.object,
-  params: PropTypes.object
+  data: PropTypes.object
 }
