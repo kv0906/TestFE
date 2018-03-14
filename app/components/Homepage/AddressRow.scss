@@ -1,1 +1,26 @@
 @import '../../stylesheets/all';
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 7;
+    @include animate(.2s);
+  }
+
+  &-edit {
+    background-color: #008CBA;
+  }
+  &-delete {
+    background-color: #f44336;
+  }
+}

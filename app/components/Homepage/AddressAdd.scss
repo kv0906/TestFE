@@ -2,35 +2,29 @@
 
 form {
   display:flex;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   .form-group {
     input {
       height: 20px;
       border: 1px solid #000;
       border-radius: 0;
       margin-right: 20px;
-      padding: 5px;
+      padding: 10px;
       font-size: 15px;
     }
   }
 
-  .chooseFromMap {
-    width: 30px;
-    height: 30px;
-    background: url('../../vendor/images/google-map.png');
-    @include backgroundCover;
-    margin-left: 20px;
-    cursor: pointer;
-  }
 
   .submit-btn {
     margin-left: 30px;
-    width: 80px;
-    height: 30px;
+    width: 150px;
+    font-weight: bold;
+    height: 40px;
     text-align: center;
     background: $blue;
     color: #fff;
     cursor: pointer;
+    text-transform: uppercase;
 
     &:hover {
       @include animate(.2s);

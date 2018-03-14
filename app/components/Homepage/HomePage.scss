@@ -8,15 +8,28 @@
   width: 100%;
 
   td, th {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border:1px solid #ddd;
+    background: #fff;
+  }
+  th {
+    padding: 10px;
   }
   td {
-    cursor: pointer;
-    &:hover {
-      background-color: #ddd;
+    padding:0;
+  }
+  .cell {
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 0px;
+      border:none;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      font-size: 15px;
     }
   }
+
 
   th {
     padding-top: 12px;
@@ -24,6 +37,26 @@
     text-align: left;
     background-color: $blue;
     color: white;
+  }
+}
+
+.download-csv {
+  width: 150px;
+  height: 30px;
+  background-color:$blue;
+  line-height: 30px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  margin:20px 0;
+  &:hover {
+    opacity: .7;
+    @include animate(.2s);
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
   }
 }
 /*End Addresses table style*/
