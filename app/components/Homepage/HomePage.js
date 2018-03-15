@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import AddressAdd from 'AddressAdd'
+import _ from 'lodash'
 import AddressRow from 'AddressRow'
 import firebase from 'firebase'
 import {CSVLink, CSVDownload} from 'react-csv';
@@ -8,7 +9,6 @@ import { Marker } from 'react-google-maps'
 
 import {DB_CONFIG} from '../Config/config'
 import addresses from "../../redux/reducer/addresses";
-import MapContainer from './MapContainer'
 
 export default class HomePage extends React.Component {
   constructor (props) {
@@ -25,7 +25,19 @@ export default class HomePage extends React.Component {
   }
   componentWillMount () {
     const previousAddress = this.state.addresses
-
+      // this.database.on('child_changed', snap => {
+      //     for(var i=0; i < previousAddress.length; i++){
+      //         previousAddress[i].id = snap.key
+      //         previousAddress[i].streetname = snap.val().streetname
+      //         previousAddress[i].ward = snap.val().ward
+      //         previousAddress[i].country = snap.val().country
+      //         previousAddress[i].city = snap.val().city
+      //         previousAddress[i].district = snap.val().district
+      //     }
+      //     this.setState({
+      //         addresses: previousAddress
+      //     })
+      // })
     this.database.on('child_added', snap => {
       previousAddress.push({
           id: snap.key,
@@ -46,11 +58,11 @@ export default class HomePage extends React.Component {
                   previousAddress.splice(i, 1);
               }
           }
-
           this.setState({
               addresses: previousAddress
           })
       })
+
   }
   //Adding new address to database
   addNewAddress = (newAddess) => {
@@ -62,8 +74,23 @@ export default class HomePage extends React.Component {
           country: newAddess.country,
       });
   }
-  updateExistingAddress = (id, data) => {
-      this.database.child(id).update(data);
+    saveAddress = (oldAddress , newAddress) => {
+        const foundAddress = _.find(this.state.addresses, address => address.key === oldAddress.key);
+        foundAddress.streetname = newAddress.streetname
+        foundAddress.ward = newAddress.ward
+        foundAddress.district = newAddress.district
+        foundAddress.city = newAddress.city
+        foundAddress.country = newAddress.country
+        this.setState({ addresses: this.state.addresses });
+        console.log(newAddress)
+        // console.log(id)
+        // this.database.child(id).set({
+        //     streetname: newAddess.streetname,
+        //     ward: newAddess.ward,
+        //     district: newAddess.district,
+        //     city: newAddess.city,
+        //     country: newAddess.country,
+        // })
     }
     removeAddress = (addressID) => {
         console.log("from the parent: " + addressID);
@@ -76,7 +103,6 @@ export default class HomePage extends React.Component {
           <h1>Saving Address Application</h1>
         </div>
         <div className="inner-content">
-            <MapContainer/>
           <AddressAdd addNewAddress={this.addNewAddress}/>
           <div className="address-table">
             <h2>Result</h2>
@@ -93,7 +119,7 @@ export default class HomePage extends React.Component {
                   <th>Country</th>
                 </tr>
                 {this.state.addresses.map((add) => {
-                  return (<AddressRow updateExistingAddress={this.updateExistingAddress} removeAddress ={this.removeAddress} data={add} key={add.id} id={add.id}/>)
+                  return (<AddressRow saveAddress={this.saveAddress} removeAddress ={this.removeAddress} data={add} key={add.id} id={add.id}/>)
                 })
                 }
               </table>

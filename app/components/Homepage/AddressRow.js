@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import EditableCell from './EditableCell'
 require('./HomePage.scss')
 require('./AddressRow.scss')
 
@@ -9,7 +8,6 @@ export default class AddressRow extends React.Component {
     super(props)
       this.state = {
         isEditing: false,
-          disabled: 'disabled',
           newAddress: {
               streetname: '',
               ward: '',
@@ -20,11 +18,26 @@ export default class AddressRow extends React.Component {
       }
     this.data = props.data
     this.id = props.id
-    this.key = props.key
   }
-  handleRemoveAddress = (id) => {
-    this.props.removeAddress(id)
-  }
+
+
+   toggleEdit = () =>  {
+        this.setState({
+            isEditing: true
+        })
+    }
+    onCancelClick = () => {
+        this.setState({isEditing: false})
+    }
+    handleRemoveAddress = (id) => {
+        this.props.removeAddress(id)
+    }
+    onSaveClick = () => {
+        const oldAddress = this.props.data
+        const newAddress = this.state.newAddress
+        this.props.saveAddress(oldAddress , newAddress);
+        this.setState({ isEditing: false });
+    }
     handleChangeFor = (propertyName) => (event) => {
         const { newAddress } = this.state;
         const newAddressAdding = {
@@ -33,58 +46,47 @@ export default class AddressRow extends React.Component {
         };
         this.setState({ newAddress: newAddressAdding });
     }
-
-    onSaveClick = () => {
-        // this.props.updateExistingAddress(id , this.state.newAddress)
-        //    Reset state
-        // this.setState({
-        //     disabled: 'disabled',
-        //     newAddress: {
-        //         streetname: '',
-        //         ward: '',
-        //         district: '',
-        //         country: '',
-        //         city: ''
-        //     }
-        // })
-        console.log("Save !")
-    }
-    toggleEdit =  () =>  {
-        this.setState({
-            isEditing: true
-        })
-    }
-    onCancelClick = () => {
-        this.setState({
-            isEditing: false
-        })
-    }
     renderActionsSection() {
         if (this.state.isEditing) {
             return (
-                <td>
-                    <button onClick={this.onSaveClick.bind(this)} className="button button-edit">Save</button>
-                    <button onClick={this.onCancelClick.bind(this)} className="button button-delete">Cancel</button>
+                <td className="btn-group">
+                    <button onClick={this.onSaveClick} className="button button-edit">Save</button>
+                    <button onClick={this.onCancelClick} className="button button-delete">Cancel</button>
                 </td>
             );
         }
 
         return (
-            <td>
+            <td className="btn-group">
                 <button onClick={() =>this.toggleEdit()} className="button button-edit">Edit</button>
                 <button onClick={() => this.handleRemoveAddress(this.id)} className="button button-delete">&times;</button>
             </td>
+        );
+    }
+    renderCell = (cat) => {
+        let {isEditing} = this.state;
+
+        if (isEditing) {
+            return (
+                <td className="cell"><input onChange={this.handleChangeFor(cat)} type="text" defaultValue={this.data[cat]} ref="editInput" />
+                </td>
+            );
+        }
+
+        return (
+            <td className="cell"><span>{this.data[cat]}</span></td>
+
         );
     }
 
   render () {
     return (
       <tr>
-        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='streetname'/></td>
-        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='ward'/></td>
-        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='district'/></td>
-        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='city'/></td>
-        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='country'/></td>
+          {this.renderCell('streetname')}
+          {this.renderCell('ward')}
+          {this.renderCell('district')}
+          {this.renderCell('city')}
+          {this.renderCell('country')}
           {this.renderActionsSection()}
       </tr>
     )
