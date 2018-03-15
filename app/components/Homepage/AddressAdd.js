@@ -40,6 +40,7 @@ export default class AddressAdd extends React.Component {
       }
     })
   }
+
   render () {
     return (
       <div>

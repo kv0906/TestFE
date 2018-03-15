@@ -92,8 +92,8 @@ export default class HomePage extends React.Component {
                   <th>City</th>
                   <th>Country</th>
                 </tr>
-                {this.state.addresses.map((note) => {
-                  return (<AddressRow updateExistingAddress={this.updateExistingAddress} removeAddress ={this.removeAddress} data={note} key={note.id} id={note.id} disabled="disabled"/>)
+                {this.state.addresses.map((add) => {
+                  return (<AddressRow updateExistingAddress={this.updateExistingAddress} removeAddress ={this.removeAddress} data={add} key={add.id} id={add.id}/>)
                 })
                 }
               </table>

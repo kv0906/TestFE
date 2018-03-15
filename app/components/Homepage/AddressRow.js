@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import EditableCell from './EditableCell'
 require('./HomePage.scss')
 require('./AddressRow.scss')
 
@@ -24,9 +25,6 @@ export default class AddressRow extends React.Component {
   handleRemoveAddress = (id) => {
     this.props.removeAddress(id)
   }
-  handleEdit = (id) => {
-      this.props.editAddress(id)
-  }
     handleChangeFor = (propertyName) => (event) => {
         const { newAddress } = this.state;
         const newAddressAdding = {
@@ -35,37 +33,59 @@ export default class AddressRow extends React.Component {
         };
         this.setState({ newAddress: newAddressAdding });
     }
+
+    onSaveClick = () => {
+        // this.props.updateExistingAddress(id , this.state.newAddress)
+        //    Reset state
+        // this.setState({
+        //     disabled: 'disabled',
+        //     newAddress: {
+        //         streetname: '',
+        //         ward: '',
+        //         district: '',
+        //         country: '',
+        //         city: ''
+        //     }
+        // })
+        console.log("Save !")
+    }
     toggleEdit =  () =>  {
         this.setState({
-                disabled: ''
-            })
-    }
-    save = (id) => {
-        this.props.updateExistingAddress(id , this.state.newAddress)
-        //    Reset state
-        this.setState({
-            disabled: 'disabled',
-            newAddress: {
-                streetname: '',
-                ward: '',
-                district: '',
-                country: '',
-                city: ''
-            }
+            isEditing: true
         })
     }
+    onCancelClick = () => {
+        this.setState({
+            isEditing: false
+        })
+    }
+    renderActionsSection() {
+        if (this.state.isEditing) {
+            return (
+                <td>
+                    <button onClick={this.onSaveClick.bind(this)} className="button button-edit">Save</button>
+                    <button onClick={this.onCancelClick.bind(this)} className="button button-delete">Cancel</button>
+                </td>
+            );
+        }
+
+        return (
+            <td>
+                <button onClick={() =>this.toggleEdit()} className="button button-edit">Edit</button>
+                <button onClick={() => this.handleRemoveAddress(this.id)} className="button button-delete">&times;</button>
+            </td>
+        );
+    }
+
   render () {
     return (
       <tr>
-        <td className="cell"><input onChange={this.handleChangeFor('streetname')} disabled={this.state.disabled} type="text" value={this.data.streetname}/></td>
-        <td className="cell"><input onChange={this.handleChangeFor('ward')} disabled={this.state.disabled} type="text" value={this.data.ward}/></td>
-        <td className="cell"><input onChange={this.handleChangeFor('district')} disabled={this.state.disabled} type="text" value={this.data.district}/></td>
-        <td className="cell"><input onChange={this.handleChangeFor('city')} disabled={this.state.disabled} type="text" value={this.data.city}/></td>
-        <td className="cell"><input onChange={this.handleChangeFor('country')} disabled={this.state.disabled} type="text" value={this.data.country}/></td>
-
-        <button onClick={() =>this.toggleEdit()} className="button button-edit">Edit</button>
-          <button onClick={() =>this.save(this.id)} className="button button-save">Save</button>
-        <button onClick={() => this.handleRemoveAddress(this.id)} className="button button-delete">&times;</button>
+        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='streetname'/></td>
+        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='ward'/></td>
+        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='district'/></td>
+        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='city'/></td>
+        <td className="cell"><EditableCell isEditing={this.state.isEditing} data = {this.data} category='country'/></td>
+          {this.renderActionsSection()}
       </tr>
     )
   }
