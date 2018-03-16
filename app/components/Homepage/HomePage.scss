@@ -8,9 +8,13 @@
       @include FontMonseratBold(30px);
     }
   }
-
   .btn-general {
-    margin-bottom: 30px;
+    margin-top: 30px;
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
   }
 }
 
@@ -70,12 +74,6 @@
   }
 }
 
-.btn-general {
-  a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-}
+
 /*End Addresses table style*/
 

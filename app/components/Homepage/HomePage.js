@@ -106,9 +106,6 @@ export default class HomePage extends React.Component {
           <AddressAdd addNewAddress={this.addNewAddress}/>
           <div className="address-table">
             <h2>Result</h2>
-              <div className="btn-general">
-                  <CSVLink data={this.state.addresses}>Download CSV</CSVLink>
-              </div>
             <div className="inner-content">
               <table id="addresses">
                 <tr className="category">
@@ -123,6 +120,9 @@ export default class HomePage extends React.Component {
                 })
                 }
               </table>
+                <div className="btn-general">
+                    <CSVLink data={this.state.addresses}>Download CSV</CSVLink>
+                </div>
             </div>
           </div>
         </div>
