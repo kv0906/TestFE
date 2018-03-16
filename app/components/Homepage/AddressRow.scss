@@ -1,27 +1,43 @@
 @import '../../stylesheets/all';
 
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 13px;
-  margin: 4px 2px;
-  cursor: pointer;
+.btn-group {
+  display:flex;
+  width: 50%;
+}
 
+.button {
+  display:block;
+  padding: 12px 14px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  background-color: transparent;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 50%;
+
+  i {
+    color: $blue;
+    font-size:15px;
+    vertical-align: middle;
+  }
   &:hover {
-    opacity: 7;
+    background-color: $blue;
     @include animate(.2s);
+    i {
+      color: #fff;
+    }
   }
 
   &-edit {
-    background-color: #008CBA;
+
+    border: 1px solid $blue;
     margin:0 10px;
   }
   &-delete {
-    background-color: #f44336;
+    border: 1px solid $blue;
+    //background-color: #f44336;
   }
 }

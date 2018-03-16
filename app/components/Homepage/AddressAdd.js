@@ -43,12 +43,12 @@ const MapWithASearchBox = compose(
                     })
                 },
                 getData: () => {
-                    this.props.autoFillForm(
-                        this.state.places[0]['address_components'][0]['long_name'],
-                        this.state.places[0]['address_components'][1]['long_name'],
-                        this.state.places[0]['address_components'][2]['long_name']
-                 )
-
+                 //    this.props.autoFillForm(
+                 //        this.state.places[0]['address_components'][0]['long_name'],
+                 //        this.state.places[0]['address_components'][1]['long_name'],
+                 //        this.state.places[0]['address_components'][2]['long_name']
+                 // )
+                        console.log(this.state.places[0])
 
                 },
                 onSearchBoxMounted: ref => {
@@ -193,7 +193,7 @@ export default class AddressAdd extends React.Component {
             <input id="locality" onChange={this.handleChangeFor('city')} type="text" placeholder="City"value={this.state.newAddress.city}/>
             <input id="country"  onChange={this.handleChangeFor('country')} type="text" placeholder="Country"value={this.state.newAddress.country}/>
           </div>
-          <button onClick={this.updateAddress} type="submit" className="submit-btn">Add new address</button>
+          <button onClick={this.updateAddress} type="submit" className="btn-general">Add new address</button>
         </form>
       </div>
 

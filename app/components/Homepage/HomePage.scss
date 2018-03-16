@@ -1,28 +1,44 @@
 @import '../../stylesheets/all';
+.container {
+  width: 90%;
+  margin: 0 auto;
 
+  .heading {
+    h1 {
+      @include FontMonseratBold(30px);
+    }
+  }
+
+  .btn-general {
+    margin-bottom: 30px;
+  }
+}
 
 /*Addresses table style*/
 #addresses {
 
   border-collapse: collapse;
   width: 100%;
+  @include FontMonserat(15px);
+
 
   td, th {
-    border:1px solid #ddd;
+    border:none;
     background: #fff;
   }
   th {
     padding: 10px;
   }
-  td {
-    padding:0;
+  tr {
   }
-  .btn-group {
-    border:none;
-    width: 20%;
+  td {
+    border-bottom: 1px solid #f2f2f2;
   }
   .cell {
+    padding: 10px;
+
     span {
+      text-align: center;
       width: 100%;
       height: 100%;
       font-size: 15px;
@@ -54,19 +70,7 @@
   }
 }
 
-.download-csv {
-  width: 150px;
-  height: 30px;
-  background-color:$blue;
-  line-height: 30px;
-  text-align: center;
-  padding: 10px;
-  cursor: pointer;
-  margin:20px 0;
-  &:hover {
-    opacity: .7;
-    @include animate(.2s);
-  }
+.btn-general {
   a {
     color: #fff;
     text-decoration: none;

@@ -1,4 +1,24 @@
+//Common style
+body {
+    background: #f5f6fa;
+}
 
-div#root {
-    font-family: 'Open Sans', sans-serif;
+.btn-general {
+    width: 150px;
+    font-weight: bold;
+    height: 100%;
+    padding: 18px;
+    text-align: center;
+    @include FontMonseratBold(10px);
+    color: #fff;
+    cursor: pointer;
+    text-transform: uppercase;
+    background: #7f8ff4;
+    -webkit-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    &:hover {
+        @include animate(.2s);
+        opacity: .7;
+    }
 }

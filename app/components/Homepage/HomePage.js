@@ -84,7 +84,7 @@ export default class HomePage extends React.Component {
         this.setState({ addresses: this.state.addresses });
         console.log(newAddress)
         // console.log(id)
-        // this.database.child(id).set({
+        // this.database.child(id).update({
         //     streetname: newAddess.streetname,
         //     ward: newAddess.ward,
         //     district: newAddess.district,
@@ -98,7 +98,7 @@ export default class HomePage extends React.Component {
     }
   render () {
     return (
-      <div className="main">
+      <div className="container">
         <div className="heading">
           <h1>Saving Address Application</h1>
         </div>
@@ -106,7 +106,7 @@ export default class HomePage extends React.Component {
           <AddressAdd addNewAddress={this.addNewAddress}/>
           <div className="address-table">
             <h2>Result</h2>
-              <div className="download-csv">
+              <div className="btn-general">
                   <CSVLink data={this.state.addresses}>Download CSV</CSVLink>
               </div>
             <div className="inner-content">

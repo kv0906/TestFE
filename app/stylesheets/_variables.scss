@@ -5,11 +5,41 @@ PARAMATERS=====================*/
 /*===================
 COLOR=====================*/
 
-$blue:#2d64af;
+$blue:#7f8ff4;
 
 /*===================
 FONTS=====================*/
+@mixin FontMonserat ( $value, $line:1.1 ) {
+	font-family: 'Montserrat', sans-serif;
+	font-size: $value;
+	line-height: $line;
+	font-weight: 400;
+	font-style: normal;
+}
 
+@mixin FontMonseratBold ( $value, $line:1.1 ) {
+	font-family: 'Montserrat', sans-serif;
+	font-size: $value;
+	line-height: $line;
+	font-weight: 700;
+	font-style: normal;
+}
+
+@mixin FontMonseratExtralight ( $value, $line:1.1 ) {
+	font-family: 'Montserrat', sans-serif;
+	font-size: $value;
+	line-height: $line;
+	font-weight: 200;
+	font-style: normal;
+}
+
+@mixin FontMonseratThin ( $value, $line:1.1 ) {
+	font-family: 'Montserrat', sans-serif;
+	font-size: $value;
+	line-height: $line;
+	font-weight: 100;
+	font-style: normal;
+}
 /*===================
 MIXIN=====================*/
 @mixin animate($time){

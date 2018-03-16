@@ -46,7 +46,6 @@ module.exports = {
       AddressTable: path.resolve(__dirname, 'app/components/Homepage/AddressTable.js'),
       AddressRow: path.resolve(__dirname, 'app/components/Homepage/AddressRow.js'),
       AddressAdd: path.resolve(__dirname, 'app/components/Homepage/AddressAdd.js'),
-
       Main: path.resolve(__dirname, 'app/components/Main.js')
     }
   },
