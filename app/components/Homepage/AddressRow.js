@@ -49,20 +49,20 @@ export default class AddressRow extends React.Component {
     renderActionsSection() {
         if (this.state.isEditing) {
             return (
-                <div className="btn-group">
+                <td className="btn-group">
                     <button onClick={this.onSaveClick} className="button button-edit">Save</button>
                     <button onClick={this.onCancelClick} className="button button-delete">Cancel</button>
-                </div>
+                </td>
             );
         }
 
         return (
-            <div className="btn-group">
+            <td className="btn-group">
                 <button onClick={() =>this.toggleEdit()} className="button button-edit"><i className="fa fa-edit"></i></button>
                 <button onClick={() => this.handleRemoveAddress(this.id)} className="button button-delete"><i className="fa fa-times"></i>
 
                 </button>
-            </div>
+            </td>
         );
     }
     renderCell = (cat) => {

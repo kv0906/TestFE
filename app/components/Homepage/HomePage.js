@@ -108,17 +108,19 @@ export default class HomePage extends React.Component {
             <h2>Result</h2>
             <div className="inner-content">
               <table id="addresses">
-                <tr className="category">
-                  <th>Streetname</th>
-                  <th>Ward</th>
-                  <th>District</th>
-                  <th>City</th>
-                  <th>Country</th>
-                </tr>
-                {this.state.addresses.map((add) => {
-                  return (<AddressRow saveAddress={this.saveAddress} removeAddress ={this.removeAddress} data={add} key={add.id} id={add.id}/>)
-                })
-                }
+                  <tbody>
+                  <tr className="category">
+                      <th>Streetname</th>
+                      <th>Ward</th>
+                      <th>District</th>
+                      <th>City</th>
+                      <th>Country</th>
+                  </tr>
+                  {this.state.addresses.map((add) => {
+                      return (<AddressRow saveAddress={this.saveAddress} removeAddress ={this.removeAddress} data={add} key={add.id} id={add.id}/>)
+                  })
+                  }
+                  </tbody>
               </table>
                 <div className="btn-general">
                     <CSVLink data={this.state.addresses}>Download CSV</CSVLink>
