@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import AddressAdd from 'AddressAdd'
+import Form from 'Form'
 import _ from 'lodash'
 import AddressRow from 'AddressRow'
 import firebase from 'firebase'
@@ -103,26 +103,31 @@ export default class HomePage extends React.Component {
           <h1>Saving Address Application</h1>
         </div>
         <div className="inner-content">
-          <AddressAdd addNewAddress={this.addNewAddress}/>
+
+            {/*Form input*/}
+          <Form addNewAddress={this.addNewAddress}/>
+
           <div className="address-table">
             <h2>Result</h2>
             <div className="inner-content">
-              <table id="addresses">
-                  <tbody>
-                  <tr className="category">
-                      <th>Streetname</th>
-                      <th>Ward</th>
-                      <th>District</th>
-                      <th>City</th>
-                      <th>Country</th>
-                  </tr>
-                  {this.state.addresses.map((add) => {
-                      return (<AddressRow saveAddress={this.saveAddress} removeAddress ={this.removeAddress} data={add} key={add.id} id={add.id}/>)
-                  })
-                  }
-                  </tbody>
-              </table>
-                <div className="btn-general">
+                <div className="table-wrapper">
+                    <table>
+                        <tbody>
+                        <tr className="category">
+                            <th>Streetname</th>
+                            <th>Ward</th>
+                            <th>District</th>
+                            <th>City</th>
+                            <th>Country</th>
+                        </tr>
+                        {this.state.addresses.map((add) => {
+                            return (<AddressRow saveAddress={this.saveAddress} removeAddress ={this.removeAddress} data={add} key={add.id} id={add.id}/>)
+                        })
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div className="btn-general download">
                     <CSVLink data={this.state.addresses}>Download CSV</CSVLink>
                 </div>
             </div>

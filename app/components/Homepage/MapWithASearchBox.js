@@ -45,12 +45,32 @@ const MapWithASearchBox = compose(
           })
         },
         getData: () => {
-          this.props.autoFillForm(
-            this.state.places[0]['address_components'][0]['long_name'],
-            this.state.places[0]['address_components'][1]['long_name'],
-            this.state.places[0]['address_components'][2]['long_name']
-          )
-          console.log(this.state.places[0])
+          let streetNum = ''
+          let streetName = ''
+          let ward = ''
+          let city = ''
+          let district = ''
+          let country = ''
+          let array = this.state.places[0]['address_components']
+          for (let i = 0; i < array.length; i++) {
+            if (array[i]['types'][0] === 'street_number') {
+              streetNum = array[i]['long_name']
+            } else if (array[i]['types'][0] === 'route') {
+              streetName = array[i]['long_name']
+            } else if (array[i]['types'][0] === 'sublocality_level_1') {
+              ward = array[i]['long_name']
+            } else if (array[i]['types'][0] === 'administrative_area_level_2') {
+              district = array[i]['long_name']
+            } else if (array[i]['types'][0] === 'administrative_area_level_1') {
+              city = array[i]['long_name']
+            } else if (array[i]['types'][0] === 'country') {
+              country = array[i]['long_name']
+            }
+          }
+          let address = streetNum + ' ' + streetName
+
+          this.props.autoFillForm(address, ward, district, city, country)
+          console.log(this.state.places[0]['address_components'])
         },
         onSearchBoxMounted: ref => {
           refs.searchBox = ref
@@ -99,7 +119,7 @@ const MapWithASearchBox = compose(
     >
       <input
         type="text"
-        placeholder="Search for your places"
+        placeholder="Search for your address"
         style={{
           boxSizing: `border-box`,
           border: `1px solid transparent`,
@@ -115,15 +135,6 @@ const MapWithASearchBox = compose(
         }}
       />
     </SearchBox>
-    <div>
-      {props.places.map(({ place_id, formatted_address, geometry: { location } }) =>
-        <span key={place_id}>
-          {formatted_address}
-          {' at '}
-                        ({location.lat()}, {location.lng()})
-        </span>
-      )}
-    </div>
     {props.markers.map((marker, index) =>
       <Marker key={index} position={marker.position} onMouseOver={props.onToggleOpen} onClick={props.getData}
       > {props.isOpen && <InfoBox

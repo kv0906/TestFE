@@ -37,7 +37,7 @@ module.exports = {
   ],
   devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : 'source-map',
   devServer: {
-    hot: true,
+    hot: false,
     inline: true,
     historyApiFallback: true,
     overlay: true,
@@ -50,7 +50,7 @@ module.exports = {
       HomePage: path.resolve(__dirname, 'app/components/Homepage/Homepage.js'),
       AddressTable: path.resolve(__dirname, 'app/components/Homepage/AddressTable.js'),
       AddressRow: path.resolve(__dirname, 'app/components/Homepage/AddressRow.js'),
-      AddressAdd: path.resolve(__dirname, 'app/components/Homepage/AddressAdd.js'),
+      Form: path.resolve(__dirname, 'app/components/Homepage/Form.js'),
       Main: path.resolve(__dirname, 'app/components/Main.js')
     }
   },
