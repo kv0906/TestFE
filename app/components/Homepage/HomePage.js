@@ -75,7 +75,7 @@ export default class HomePage extends React.Component {
       });
   }
     saveAddress = (oldAddress , newAddress) => {
-        const foundAddress = _.find(this.state.addresses, address => address.key === oldAddress.key);
+        const foundAddress = _.find(this.state.addresses, address => address.id === oldAddress.id);
         foundAddress.streetname = newAddress.streetname
         foundAddress.ward = newAddress.ward
         foundAddress.district = newAddress.district
@@ -83,14 +83,8 @@ export default class HomePage extends React.Component {
         foundAddress.country = newAddress.country
         this.setState({ addresses: this.state.addresses });
         console.log(newAddress)
-        // console.log(id)
-        // this.database.child(id).update({
-        //     streetname: newAddess.streetname,
-        //     ward: newAddess.ward,
-        //     district: newAddess.district,
-        //     city: newAddess.city,
-        //     country: newAddess.country,
-        // })
+        console.log(foundAddress.id)
+        this.database.child(foundAddress.id).update(newAddress)
     }
     removeAddress = (addressID) => {
         console.log("from the parent: " + addressID);
