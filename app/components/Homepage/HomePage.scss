@@ -124,5 +124,48 @@
   }
 }
 
+//Repsonsive
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    height: auto;
+  }
+  .mapWrapper {
+    float:none;
+    width: 100%;
+  }
+  form {
+    float: none;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  form .form-group {
+    display:flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  form .form-group input {
+    width: 80%;
+  }
+  form .btn-general {
+    margin-top:0;
+  }
+  #btn-group {
+    width: 100%;
+  }
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  .address-table table {
+    font-size :13px;
+  }
+}
+@media screen and (max-width: 640px) {
+  form .form-group input {
+    width: 90%;
+  }
+}
+
+
 
 
