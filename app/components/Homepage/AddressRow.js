@@ -41,8 +41,13 @@ export default class AddressRow extends React.Component {
     onSaveClick = () => {
         const oldAddress = this.props.data
         const newAddress = this.state.newAddress
-        this.props.saveAddress(oldAddress , newAddress);
-        this.setState({ isEditing: false });
+        if (newAddress.streetname !== '') {
+            this.props.saveAddress(oldAddress , newAddress);
+            this.setState({ isEditing: false });
+        }
+        else {
+            this.setState({ isEditing: false });
+        }
     }
     //Handle input change value
     handleChangeFor = (propertyName) => (event) => {
@@ -58,7 +63,7 @@ export default class AddressRow extends React.Component {
         if (this.state.isEditing) {
             return (
                 <td id="btn-group">
-                    <button onClick={this.onSaveClick} className="button button-save t">Save</button>
+                    <button onClick={this.onSaveClick} className="button button-save">Save</button>
                     <button onClick={this.onCancelClick} className="button button-cancel">Cancel</button>
                 </td>
             );
