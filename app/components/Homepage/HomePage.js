@@ -25,19 +25,6 @@ export default class HomePage extends React.Component {
   }
   componentWillMount () {
     const previousAddress = this.state.addresses
-      // this.database.on('child_changed', snap => {
-      //     for(var i=0; i < previousAddress.length; i++){
-      //         previousAddress[i].id = snap.key
-      //         previousAddress[i].streetname = snap.val().streetname
-      //         previousAddress[i].ward = snap.val().ward
-      //         previousAddress[i].country = snap.val().country
-      //         previousAddress[i].city = snap.val().city
-      //         previousAddress[i].district = snap.val().district
-      //     }
-      //     this.setState({
-      //         addresses: previousAddress
-      //     })
-      // })
     this.database.on('child_added', snap => {
       previousAddress.push({
           id: snap.key,
@@ -74,6 +61,8 @@ export default class HomePage extends React.Component {
           country: newAddess.country,
       });
   }
+
+    //Update existing address from firebase
     saveAddress = (oldAddress , newAddress) => {
         const foundAddress = _.find(this.state.addresses, address => address.id === oldAddress.id);
         foundAddress.streetname = newAddress.streetname
@@ -86,10 +75,14 @@ export default class HomePage extends React.Component {
         console.log(foundAddress.id)
         this.database.child(foundAddress.id).update(newAddress)
     }
+
+    //Remove address function
     removeAddress = (addressID) => {
         console.log("from the parent: " + addressID);
         this.database.child(addressID).remove();
     }
+
+
   render () {
     return (
       <div className="container">

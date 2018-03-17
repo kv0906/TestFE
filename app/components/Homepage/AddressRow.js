@@ -20,24 +20,31 @@ export default class AddressRow extends React.Component {
     this.id = props.id
   }
 
-
+    //Toggle edit input
    toggleEdit = () =>  {
         this.setState({
             isEditing: true
         })
     }
+
+    //Handle event clicking on cancel button
     onCancelClick = () => {
         this.setState({isEditing: false})
     }
+
+    //Handle remove address row
     handleRemoveAddress = (id) => {
         this.props.removeAddress(id)
     }
+
+    //Handle save address
     onSaveClick = () => {
         const oldAddress = this.props.data
         const newAddress = this.state.newAddress
         this.props.saveAddress(oldAddress , newAddress);
         this.setState({ isEditing: false });
     }
+    //Handle input change value
     handleChangeFor = (propertyName) => (event) => {
         const { newAddress } = this.state;
         const newAddressAdding = {
@@ -46,25 +53,27 @@ export default class AddressRow extends React.Component {
         };
         this.setState({ newAddress: newAddressAdding });
     }
+    //Render different actions based on state
     renderActionsSection() {
         if (this.state.isEditing) {
             return (
                 <td id="btn-group">
-                    <button onClick={this.onSaveClick} className="button button-edit">Save</button>
-                    <button onClick={this.onCancelClick} className="button button-delete">Cancel</button>
+                    <button onClick={this.onSaveClick} className="button button-save t">Save</button>
+                    <button onClick={this.onCancelClick} className="button button-cancel">Cancel</button>
                 </td>
             );
         }
 
         return (
             <td id="btn-group">
-                <button onClick={() =>this.toggleEdit()} className="button button-edit"><i className="fa fa-edit"></i></button>
-                <button onClick={() => this.handleRemoveAddress(this.id)} className="button button-delete"><i className="fa fa-times"></i>
-
+                <button onClick={() =>this.toggleEdit()} className="button-circle button-circle-edit"><i className="fa fa-edit"></i></button>
+                <button onClick={() => this.handleRemoveAddress(this.id)} className="button-circle button-circle-delete"><i className="fa fa-times"></i>
                 </button>
             </td>
         );
     }
+
+    //Render different cell type based on state
     renderCell = (cat) => {
         let {isEditing} = this.state;
 

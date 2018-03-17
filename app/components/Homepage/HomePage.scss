@@ -1,4 +1,5 @@
 @import '../../stylesheets/all';
+
 .container {
   width: 90%;
   margin: 0 auto;
@@ -88,6 +89,30 @@
 }
 
 .button {
+  width: 100px;
+  background-color: transparent;
+  border: 1px solid $blue;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  color: $blue;
+  padding: 12px 14px;
+  outline:none;
+
+  &:hover {
+    background: $blue;
+    color: #fff;
+    @include animate(.2s);
+  }
+  &-save {
+    margin:0 10px;
+  }
+  &-cancel {
+
+  }
+}
+
+.button-circle {
   display:block;
   padding: 12px 14px;
   vertical-align: middle;
@@ -95,10 +120,10 @@
   text-decoration: none;
   background-color: transparent;
   text-align: center;
-  position: relative;
   cursor: pointer;
   white-space: nowrap;
   border-radius: 50%;
+  border: 1px solid $blue;
 
   i {
     color: $blue;
@@ -112,20 +137,13 @@
       color: #fff;
     }
   }
-
   &-edit {
 
-    border: 1px solid $blue;
     margin:0 10px;
-  }
-  &-delete {
-    border: 1px solid $blue;
-    //background-color: #f44336;
   }
 }
 
 //Repsonsive
-
 @media screen and (max-width: 768px) {
   .wrapper {
     height: auto;
@@ -158,6 +176,9 @@
   }
   .address-table table {
     font-size :13px;
+  }
+  .button {
+    width: 60px;
   }
 }
 @media screen and (max-width: 640px) {
