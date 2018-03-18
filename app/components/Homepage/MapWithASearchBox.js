@@ -118,6 +118,7 @@ const MapWithASearchBox = compose(
       onPlacesChanged={props.onPlacesChanged}
     >
       <input
+        id="google-map-search"
         type="text"
         placeholder="Search for your address"
         style={{
