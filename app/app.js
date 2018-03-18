@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from './appcontainer'
 require('font-awesome/css/font-awesome.min.css')
-require('./stylesheets/style.scss')
 import WebFont from 'webfontloader'
 
 WebFont.load({
